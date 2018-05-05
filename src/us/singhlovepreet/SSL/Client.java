@@ -89,7 +89,7 @@ public class Client
 				 // Encrypting the plain message with HASH function from HASH class
 	    	 String initial_packet=Hash.PacketGeneration(s);
 	    	 String onetimekeyofmain=Hash.keygeneration(initial_packet);
-	    	 String assemblemessage=Hash.AssemblingMessage(initial_packet,onetimekeyofmain);
+	    	 String asseemblemessage=Hash.AssemblingMessage(initial_packet,onetimekeyofmain);
 				 //sending the Encrypted Message over the Socket for security reason.
 				 pwrite.println(assemblemessage+"&"+onetimekeyofmain);
 
