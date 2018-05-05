@@ -63,7 +63,7 @@ public class Server {
 		else {
 			validate = false;
 			output.println("Login Failed! user not found 404!");
-			System.out.println(validate);
+			//System.out.println(validate);
 		}
 
 		output.flush();
@@ -113,7 +113,7 @@ public class Server {
 			if (validate == true) {
 				serverchat();
 			} else {
-				System.out.println("Server is closed due to unauthorised access!");
+				System.out.println("Server is closed due to UNAUTHORISED access!");
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
