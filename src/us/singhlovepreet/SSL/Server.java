@@ -9,26 +9,21 @@ import us.singhlovepreet.HashFunction.Hash;
 import us.singhlovepreet.RSA.RSA;
 
 public class Server {
-	static String user_publickey = "10570327118835298640449612774548292215644301232314142865661606709963209764841510286668984074134587521859845971377653319354709021651593747127274442014812141";
-
-	static String N = "10570327118835298640449612774548292215644301232314142865661606709963209764841510286668984074134587521859845971377653319354709021651593747127274442014812141";
-	//private int currentTot;
 	static boolean validate = false;
 	static ServerSocket serversocket;
 	static String s_username = "Lovepreet";
 	String s_company = "CalstateLA";
 	static Socket sock;
 	int bytesRead;
-	// Connect c = new Connect();
 	static BufferedReader input;
 	static PrintWriter output;
 	static int port = 2006;
 
 	public void start() throws IOException {
-		
+
 		System.out.println("Server Started ");
 		System.out.println("Connection Starting on port:" + port);
-		
+
 		// make connection to client on port specified
 		serversocket = new ServerSocket(port);
 
@@ -70,46 +65,37 @@ public class Server {
 			output.println("Login Failed! user not found 404!");
 			System.out.println(validate);
 		}
-		// if(validate=true)
-		// {
-		// serverchat();
-		// }
 
 		output.flush();
-		// output.close();
-
-	}
+}
 
 	public static void serverchat() throws IOException {
 		System.out.println("Server ready for chatting");
+
 		// reading from keyboard (keyRead object)
-
 		input = new BufferedReader(new InputStreamReader(System.in));
-
-		// BufferedReader keyRead = new BufferedReader(new
-		// InputStreamReader(sock.getInputStream()));
-		// sending to client (pwrite object)
 		OutputStream ostream = sock.getOutputStream();
 		output = new PrintWriter(ostream, true);
-		// PrintWriter pwrite = new PrintWriter(ostream, true);
 
-		// receiving from server ( receiveRead object)
 		InputStream istream = sock.getInputStream();
 		BufferedReader receiveRead = new BufferedReader(new InputStreamReader(istream));
 		String s;
 		String receiveMessage, sendMessage;
 		while (true) {
+			 // reading Message recieved from Server but it is Encrypted
 			s = receiveRead.readLine();
+			 // Decrypting the message
 			String[]str_split=s.split("&");
 			String assemble=str_split[0];
 			String onetimekey=str_split[1];
 			String dissemblemessage=Hash.Packet_dissAssemble(assemble, onetimekey);
 			String original_message=Hash.convertBinaryStringToString(dissemblemessage);
-					
+
 			System.out.println(s_username + ": " + original_message + "\n");
-			
+
 			System.out.println("Server: ");
-			s = input.readLine();
+			// Encrypting the plain message with HASH function from HASH class
+		 	s = input.readLine();
 			 String initial_packet=Hash.PacketGeneration(s);
 	    	 String onetimekeyofmain=Hash.keygeneration(initial_packet);
 	    	 String assemblemessage=Hash.AssemblingMessage(initial_packet,onetimekeyofmain);
