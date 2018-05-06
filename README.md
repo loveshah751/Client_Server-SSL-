@@ -35,7 +35,7 @@ If the server Successfull authenicate the client below messages will be appeared
 
 **This is Server side perpective**
 
-![MacDown logo](https://github.com/loveshah751/Client_Server-SSL-/blob/master/images/authorise_client.png)
+![MacDown logo](https://github.com/loveshah751/Client_Server-SSL-/blob/master/images/authorise_server.png)
 
 **This is Client side perpective**
 
